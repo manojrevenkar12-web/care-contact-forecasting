@@ -3,7 +3,7 @@ name = "care-contact-forecasting"
 version = "0.1.0"
 description = "Customer-care contact volumes forecast from orders, returns and events, staffed with Erlang C and scored by the service level they buy"
 requires-python = ">=3.11"
-dependencies = ["numpy>=1.26", "pandas>=2.1", "pyarrow>=14", "duckdb>=1.1", "scipy>=1.11", "statsmodels>=0.14", "lightgbm>=4.3"]
+dependencies = ["numpy>=1.26", "pandas>=2.1", "pyarrow>=14", "duckdb>=1.1", "scipy>=1.11", "statsmodels>=0.14", "lightgbm>=4.3", "scikit-learn>=1.4"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
