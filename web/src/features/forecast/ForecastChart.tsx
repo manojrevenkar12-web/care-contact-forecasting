@@ -21,7 +21,7 @@ export function ForecastChart({ story, row, chosen }: { story: Story; row: numbe
   const x = (i: number) => pad.l + (i / (n - 1)) * (W - pad.l - pad.r);
   const y = (v: number) => pad.t + (1 - v / max) * (H - pad.t - pad.b);
   const line = (vals: number[]) => vals.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
-  const band = `${line(hi)} ${lo.map((v, i) => `L${x(n - 1 - i).toFixed(1)},${y(lo[n - 1 - i]).toFixed(1)}`).join(" ")} Z`;
+  const band = `${line(hi)} ${lo.map((_, i) => `L${x(n - 1 - i).toFixed(1)},${y(lo[n - 1 - i]).toFixed(1)}`).join(" ")} Z`;
   const peak = story.days.map((d, i) => (story.peak_days.includes(d) ? i : -1)).filter((i) => i >= 0);
   const ticks = [0, 0.25, 0.5, 0.75, 1].map((t) => Math.round((max * t) / 100) * 100);
   const [market, channel] = story.keys[row].split("|");

@@ -8,6 +8,9 @@ export type ModelScore = {
   agent_cost_eur: number;
   service_level_met: number;
   late_share: number;
+  hours_over: number;
+  hours_short: number;
+  hours_misplaced: number;
 };
 
 export type Story = {
@@ -27,6 +30,7 @@ export type Run = {
   chosen: string;
   models: Record<string, ModelScore>;
   perfect_forecast: { agent_hours: number; agent_cost_eur: number; service_level_met: number; late_share: number };
+  perfect_daily_totals: { agent_hours: number; hours_misplaced: number; late_share: number };
   incidents: { flagged: number; true: number; found: number; precision: number; recall: number; missed: string[]; false_alarms: string[] };
   bot_experiment: { effect: number; ci: [number, number]; true_effect: number; treated: string[]; weeks_pre: number; weeks_post: number };
   decomposition: { origin: string; days: Record<string, number | string>[] };

@@ -37,6 +37,6 @@ describe("content", () => {
   it("lists every model with its staffing", () => {
     render(<Dashboard summary={summary} />);
     const run = summary.heldout ?? summary.dev!;
-    expect(screen.getAllByRole("row").length).toBe(Object.keys(run.models).length + 2); // header + perfect forecast
+    expect(screen.getAllByRole("row").length).toBe(Object.keys(run.models).length + 3); // header + two perfect references
   });
 });

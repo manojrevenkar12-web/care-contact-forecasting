@@ -139,6 +139,14 @@
   "service_level_met": 1.0,
   "late_share": 0.1417274986549425
  },
+ "perfect_daily_totals": {
+  "agent_hours": 288547.5,
+  "service_level_met": 0.7104359925788497,
+  "late_share": 0.23859584056742916,
+  "hours_over": 18496.5,
+  "hours_short": 17734.0,
+  "hours_misplaced": 36230.5
+ },
  "incidents": {
   "flagged": 15,
   "true": 16,

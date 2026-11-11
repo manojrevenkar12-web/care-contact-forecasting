@@ -29,7 +29,7 @@ export function Drivers({ run, reasons }: { run: Run; reasons: Record<string, st
                 return <rect key={k} x={i * bw + 1} width={bw - 2} y={H - acc} height={h} fill={color.reasons[j % color.reasons.length]} />;
               })}
               {i % 7 === 0 && (
-                <text x={i * bw + bw / 2} y={H + space[4]} fontSize={size.xs} fill={color.muted} textAnchor="middle">
+                <text x={i === 0 ? 0 : i * bw + bw / 2} y={H + space[4]} fontSize={size.xs} fill={color.muted} textAnchor={i === 0 ? "start" : "middle"}>
                   {shortDate(String(d.day))}
                 </text>
               )}
