@@ -1,0 +1,37 @@
+# Forecasting, staffing and the gate. Change a setting only with the development numbers before and after.
+chosen_model = "driver"          # the model capacity planning gets; picked on development results only
+
+[backtest]
+horizon = 42                       # six weeks of daily forecasts from each origin
+dev_origins = { first = "2024-01-08", last = "2025-08-25", every_days = 28 }
+heldout_origins = { first = "2025-09-29", last = "2025-11-17", every_days = 7 }
+history_days = 730                 # what the models train on, at most
+
+[models]
+ets_history_days = 364
+gbm = { num_leaves = 63, n_estimators = 400, learning_rate = 0.05, min_child_samples = 40 }
+driver = { half_life_days = 120, history_days = 365, channel_share_days = 28, level_days = 21, level_weight = 0.7 }
+lag_bins = [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 10], [11, 14], [15, 21], [22, 28]]
+anomaly_z = 4.0                    # robust z of log(actual / driver fit) that marks an incident day ...
+anomaly_min_ratio = 1.3            # ... when contacts are also this much above the fit (incidents are spikes; drops are holidays or lasting changes)
+clean_training_data = true         # replace flagged days with the driver fit before training ETS and GBM
+
+[intervals]
+coverage = 0.80
+min_origins = 3                    # residuals from at least this many earlier origins before an interval is given
+
+[staffing]
+horizon_days = [8, 14]             # schedules are fixed one to two weeks ahead: staff week two
+interval_seconds = 1800
+phone = { aht = 360, service_level = 0.80, answer_within = 20 }
+chat = { aht = 600, concurrency = 2, service_level = 0.80, answer_within = 60 }
+intraday_weeks = 8                 # the intraday shape comes from this many weeks before the origin
+eur_per_agent_hour = 28.0          # outsourced productive hour; an assumption, labelled as such in reports
+
+[gate]
+max_wape_vs_naive = 0.85           # the chosen model's WAPE at the staffing grain, as a share of the seasonal naive's
+max_misplaced_vs_naive = 0.90      # agent hours over or under what the real volume needed, as a share of the naive's
+coverage_low = 0.72
+coverage_high = 0.88
+min_anomaly_recall = 0.8
+min_anomaly_precision = 0.8

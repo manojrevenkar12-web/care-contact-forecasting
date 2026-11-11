@@ -1,0 +1,29 @@
+[project]
+name = "care-contact-forecasting"
+version = "0.1.0"
+description = "Customer-care contact volumes forecast from orders, returns and events, staffed with Erlang C and scored by the service level they buy"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "pandas>=2.1", "pyarrow>=14", "duckdb>=1.1", "scipy>=1.11", "statsmodels>=0.14", "lightgbm>=4.3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ccf = ["etl/sql/*.sql"]
+
+[tool.ruff]
+line-length = 160
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
